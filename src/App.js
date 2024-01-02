@@ -85,6 +85,26 @@ function App() {
 
         return (
             <form onSubmit={handleSubmit}>
+                <label htmlFor="promo-link">Promo Link</label>
+                <input
+                    type="text"
+                    id="promo-link"
+                    name="promoLink"
+                    value={updatedPromo.promoLink}
+                    onChange={handleChange}
+                    required
+                />
+
+                <label htmlFor="promo-service">Promo Service</label>
+                <input
+                    type="text"
+                    id="promo-service"
+                    name="promoService"
+                    value={updatedPromo.promoService}
+                    onChange={handleChange}
+                    required
+                />
+
                 <label htmlFor="promo-name">Promo Name</label>
                 <input
                     type="text"
@@ -131,7 +151,9 @@ function App() {
                 <table>
                     <thead>
                     <tr>
-                        <th>Promo Name</th>
+                        <th>PromoLink</th>
+                        <th>PromoService</th>
+                        <th>PromoName</th>
                         <th>Value</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -140,8 +162,11 @@ function App() {
                     <tbody>
                     {data.map((promo) => (
                         <tr key={promo.id}>
+                            <td>{promo.promoLink}</td>
+                            <td>{promo.promoService}</td>
                             <td>{promo.promoName}</td>
                             <td>{promo.value}</td>
+
                             <td>{promo.status ? "Active" : "Inactive"}</td>
                             <td>
                                 <button onClick={() => handleEdit(promo)}>Edit</button>
@@ -161,11 +186,20 @@ function App() {
                 const formData = new FormData(e.target);
                 const newData = {
                     promoName: formData.get("promo-name"),
+                    promoLink: formData.get("promo-link"),
+                    promoService: formData.get("promo-service"),
                     value: parseInt(formData.get("value")),
                     status: formData.get("status") === "true"
+
                 };
                 createData(newData)
             }}>
+                <label htmlFor="promo-link">Promo Link</label>
+                <input type="text" id="promo-link" name="promo-link" required />
+
+                <label htmlFor="promo-name">Promo Service</label>
+                <input type="text" id="promo-service" name="promo-service" required />
+
                 <label htmlFor="promo-name">Promo Name</label>
                 <input type="text" id="promo-name" name="promo-name" required />
 
